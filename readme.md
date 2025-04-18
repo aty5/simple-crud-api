@@ -6,11 +6,18 @@ This is a simple Express.js API with MongoDB using Mongoose. It allows basic CRU
 
 ## Features
 
+### Authentication
+
+- **POST** `/api/auth/signup - Register a new user
+- **POST** `/api/auth/login - Authenticate a user and return a JWT token
+
+### Product CRUD
+
 - **GET** `/api/products` - Get all products
 - **GET** `/api/products/:id` - Get a product by ID
-- **POST** `/api/products` - Create a new product
-- **PUT** `/api/products/:id` - Update a product by ID
-- **DELETE** `/api/products/:id` - Delete a product by ID
+- **POST** `/api/products` - Create a new product (requires authentication)
+- **PUT** `/api/products/:id` - Update a product by ID (requires to be the creator)
+- **DELETE** `/api/products/:id` - Delete a product by ID (requires to be the creator)
 
 ## Requirements
 
@@ -50,53 +57,80 @@ This is a simple Express.js API with MongoDB using Mongoose. It allows basic CRU
 
 ## API Documentation
 
-### GET `/api/products`
+### Authentication
+
+#### POST `/api/auth/signup`
+
+Register a new user.
+
+##### Request Body
+- `email` (String)
+- `password` (String)
+
+##### Response
+- 201 OK: User successfully registered
+- 400 Bad Request: Email already exists or validation error
+
+#### POST `/api/auth/login`
+Login and receive a JWT token.
+
+##### Request Body
+- `email` (String)
+- `password` (String)
+
+##### Response
+- 200 OK: Returns a JWT token
+- 401 Unauthorized: Incorrect email or password
+
+### Products
+
+#### GET `/api/products`
 Fetch all products.
 
-#### Response
+##### Response
 - 200 OK: Returns a list of all products.
 
-### GET `/api/products/:id`
+#### GET `/api/products/:id`
 Fetch a product by its ID.
 
-#### Params
+##### Params
 - `id`: The product's unique identifier.
 
-#### Response
+##### Response
 - 200 OK: Returns the product.
 - 404 Not Found: If the product doesn't exist.
 
-### POST `/api/products`
+#### POST `/api/products`
 Create a new product.
 
-#### Request Body
+##### Request Body
 - `name` (String): Product name (required)
 - `quantity` (Number): Product quantity (default: 0)
 - `price` (Number): Product price (default: 0)
 - `image` (String, optional): Product image URL
 
-#### Response
+##### Response
 - 200 OK: Returns the created product.
 
-### PUT `/api/products/:id`
+#### PUT `/api/products/:id`
 Update a product by its ID.
 
-#### Params
+##### Params
 - `id`: The product's unique identifier.
 
-#### Request Body
+##### Request Body
 - Same as the `POST` request.
 
-#### Response
+##### Response
 - 200 OK: Returns the updated product.
 - 404 Not Found: If the product doesn't exist.
 
-### DELETE `/api/products/:id`
+#### DELETE `/api/products/:id`
 Delete a product by its ID.
 
-#### Params
+##### Params
 - `id`: The product's unique identifier.
 
-#### Response
+##### Response
 - 200 OK: Product successfully deleted.
 - 404 Not Found: If the product doesn't exist.
