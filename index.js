@@ -1,6 +1,7 @@
 require('dotenv').config(); // ← à mettre tout en haut
 const express = require('express');
 const mongoose = require('mongoose');
+const authRoute = require('./routes/auth.route');
 const productRoute = require('./routes/product.route.js');
 
 const app = express();
@@ -8,6 +9,8 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use("/api/auth", authRoute);
+
 
 // Routes
 app.use("/api/products", productRoute);

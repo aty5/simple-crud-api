@@ -21,7 +21,7 @@ This is a simple Express.js API with MongoDB using Mongoose. It allows basic CRU
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/simple-crud-api.git
+   git clone https://github.com/aty5/simple-crud-api.git
    ```
 2. Navigate to the project directory:
    ```bash
@@ -31,9 +31,10 @@ This is a simple Express.js API with MongoDB using Mongoose. It allows basic CRU
    ```bash
    npm install
    ```
-4. Create a .env file in the root directory and add your MongoDB connection string:
+4. Create a .env file in the root directory and add your MongoDB connection string and the desired port number:
    ```bash
    MONGO_URI=mongodb+srv://your_mongodb_uri_here
+   PORT=3000
    ```
    Note: To get your MongoDB URI, create an account on MongoDB Atlas or set up a local MongoDB server.
    
@@ -41,7 +42,11 @@ This is a simple Express.js API with MongoDB using Mongoose. It allows basic CRU
    ```bash
    npm start
    ```
-6. The API will be running on http://localhost:3000.
+6. The API will be running on the port defined in your .env file.
+   For example, if you set PORT=3000, it will be accessible at:
+   ```bash
+   http://localhost:3000
+   ```
 
 ## API Documentation
 
